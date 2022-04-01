@@ -1,6 +1,6 @@
 
 
-# SEAM manuscript (version 2)
+# SEAM manuscript (version 2.0)
 
 This version of the manuscript corresponds to the second version of the SEAM shiny application: https://seam.stat.illinois.edu/app/ which is hosted here: https://seam.stat.illinois.edu/index.html
 
