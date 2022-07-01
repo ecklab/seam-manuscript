@@ -261,25 +261,29 @@ It is reasonable to assume that $n_{p,j,t} = O(n)$ and $n_{b,k,t} = O(n)$ for al
 
 We evaluate the performance of our SEAM method through a validation approach in which we train the SEAM method on data through the 2020 season and then test the coverage of highest density regions with 2021 seasonal data. We define coverage as the proportion of batted balls that land in a location on the field that is within a level $\alpha$ highest density region. We consider both marginal and conditional coverage. Marginal coverage is assessed across all 2021 batted balls. Conditional coverage is assessed for 2021 batter-pitcher matchups that yielded 10 or more balls in play. Conditional coverage is then computed as the proportion of individual batter-pitcher coverages at or above the nominal level. 
 
-We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods.
-
-
-
 \begin{table}
 \begin{center}
 \begin{tabular}{l|rrr ||rrr }
   & \multicolumn{3}{c||}{Marginal coverage} & \multicolumn{3}{|c}{Conditional coverage} \\
   \hlinelevel  & 0.5 & 0.75 & 0.9 & 0.5 & 0.75 & 0.90 \\\hlineSEAM & 0.559 & 0.811 & 0.953 & 0.579 (0.035) & 0.641 (0.034) & 0.779 (0.030) \\
-e\_batter & 0.547 & 0.793 & 0.938 & 0.513 (0.036) & 0.574 (0.035) & 0.662 (0.034) \\
-e\_pitch & 0.541 & 0.788 & 0.935 & 0.549 (0.036) & 0.595 (0.035) & 0.713 (0.032) \\\end{tabular}		
+batter & 0.547 & 0.793 & 0.938 & 0.513 (0.036) & 0.574 (0.035) & 0.662 (0.034) \\
+pitcher & 0.541 & 0.788 & 0.935 & 0.549 (0.036) & 0.595 (0.035) & 0.713 (0.032) \\\end{tabular}		
 \end{center}
 \caption{Marginal and conditional coverage properties for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution (standard errors in parentheses).  }
 \label{Tab:coverage}
 \end{table}
 
 
+We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods. 
 
+That being said, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the square that contains the playing filed while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n$ grids containing the highest probable batted ball locations as estimated by each method. We then assess the conditional coverage of these fixed-sized regions. What we find is that SEAM fixed-size region beats its competitors more often than not, and its success is often usefully higher than the other methods. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}.
 
+\begin{table}
+\begin{tabular}{l|rr|rr|rr}  & \multicolumn{2}{c|}{SEAM} & \multicolumn{2}{c|}{pitcher} & \multicolumn{2}{c}{batter}\\
+  & coverage & prob. mass  & coverage & prob. mass  & coverage & prob. mass  \\\hlinen = 1000 & 0.530 & 0.478 & 0.522 & 0.492 & 0.526 & 0.478 \\\hlinen = 2000 & 0.758 & 0.709 & 0.741 & 0.721 & 0.750 & 0.710 \\\hlinen = 3000 & 0.912 & 0.859 & 0.896 & 0.868 & 0.913 & 0.862\\\hline\end{tabular}
+\caption{Conditional coverage and cumulative probability mass of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
+\label{Tab:fixed-size}
+\end{table}
 
 \section{Data considerations}
 
