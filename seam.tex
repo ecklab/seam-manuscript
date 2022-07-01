@@ -100,12 +100,12 @@ Baseball has a rich statistical history dating back to the first box score creat
 
 The basic box score statistics which serve as the foundation for most baseball statistics do not represent the fundamental unit for which outcomes are realized. Baseball is a game with a pitcher on the mound, with a defense behind him, who first throws a ball to a batter. From here the ball is put into play or it is not, and at this moment box score statistics can then be tabulated. When we look closer at this chain of events we see that the pitcher who throws the ball possesses an arsenal of pitches whose movement, velocity, and release point are unique to that pitcher. The batter also has a unique set of traits including how hard they hit the ball, the angle in which they hit the ball in the air and spray the ball. When a ball is put into play it has a final location that is relevant to, but not accounted in, the box score. As recently as 2015 this type of high-resolution data has been collected and made publicly available \citep{statcast}. Proprietary sources maintain similar high-resolution data dating back to several years prior to 2015 \citep{BIS}.
 
-This type of high resolution data has ushered in a new sophisticated class of techniques for finding and exploiting players' strengths and weaknesses which has had a major impact on players' statistics when put into practice. As an example, \cite{jensen2009bayesball} showed how this data could be used to better quantify defensive ability using Baseball Information Solutions data through 2007. One of the most prominent example of the success of this type of high-resolution data has been the implementation of defensive shifting based on the spray chart, a plot of locations for which a batter has hit the ball in the past when the ball has been put into play. Through the early goings of the 2022 MLB season, MLB had seen infield shifts on 37\% of pitches \citep{baccellieri2022infield}. This rate of deployment demonstrates the effectiveness of the strategy.
+This type of high resolution data has ushered in a new sophisticated class of techniques for finding and exploiting players' strengths and weaknesses which has had a major impact on players' statistics when put into practice. As an example, \cite{jensen2009bayesball} showed how this data could be used to better quantify defensive ability using Baseball Information Solutions data through 2007. One of the most prominent example of the success of this type of high-resolution data has been the implementation of defensive shifting based on the spray chart \citep{pettispray, marchi2019analyzing}, a plot of locations for which a batter has hit the ball in the past when the ball has been put into play. Through the early goings of the 2022 MLB season, MLB had seen infield shifts on 37\% of pitches \citep{baccellieri2022infield}. This rate of deployment demonstrates the effectiveness of the strategy.
 
-Even though the shift has demonstrated a record of success, the strategy of the shift is based upon a batters' spray chart or a pitchers' spray chart allowed. These charts are compiled marginally across all matchups and they therefore do not account for the interactive effect that is observed when a particular batter faces a particular pitcher. However, spray charts for specific batter-pitcher matchups are not often able to be reliably constructed due to sparse matchup data. 
+Even though the shift has demonstrated a record of success, the strategy of the shift is based upon batters' empirical spray chart or pitchers' empirical spray chart allowed. These charts are compiled marginally across all matchups and they therefore do not account for the interactive effect that is observed when a particular batter faces a particular pitcher. However, spray charts for specific batter-pitcher matchups are not often able to be reliably constructed due to sparse matchup data. 
 
-In this article we develop SEAM methodology which alleviates the challenge posed by sparse matchup data and allows for the construction of specific batter-pitcher matchups through a principled incorporation of batted-ball outcomes of players that are similar to the batter and pitcher under study. The SEAM method poses each batter-pitcher matchup as having a spray chart distribution which are 2-dimensional spatial distributions representing the potential batted-ball locations when a particular batter faces off against a particular pitcher. %Estimation of this distribution is performed using variations of standard nonparametric methods. 
-Estimation of the specific batter-pitcher matchup involves batted-ball locations from three sources: 1) those from the batter under study vs the pitcher under study; 2) those from the batter under study vs a synthetic version of the pitcher under study; 3) those from a synthetic version of the batter under study vs the pitcher under study. Here the batted-ball locations corresponding to synthetic versions of the players under study are taken across all other MLB players, the locations are weighted to reflect similarity to the player under study where similarity ranges from 0 (not considered at all) to 1 (a clone of the player under study). These three components represent separate spray chart distributions and they are combined through a convex combination with weights reflecting overall similarity of the synthetic players to those under study where these weights collapse on the specific batter-pitcher empirical spray distribution when enough data is available to reliably estimate this distribution. Mathematical justification for the combination of these estimated spray distributions is provided. We also demonstrate that our SEAM method outperforms the marginal batter or pitcher spray charts through a detailed cross-validation study in which we hold out data from the 2021 season and determine how well $(1-\alpha)\times 100\%$ highest density regions include the batted-ball locations from the held out data. SEAM exhibits nominal marginal coverage, but is no better than the existing batter or pitcher spray charts. SEAM dramatically outperforms batter or pitcher spray charts when we evaluate conditional coverage, indicating that our approach is better suited for predicting batted-ball locations when a particular batter faces a particular pitching. 
+In this article we develop SEAM methodology which alleviates the challenge posed by sparse matchup data through a principled incorporation of batted-ball outcomes of players that are similar to the batter and pitcher under study. The SEAM method poses each batter-pitcher matchup as having a spray chart distribution which are 2-dimensional spatial distributions representing the potential batted-ball locations when a particular batter faces off against a particular pitcher. %Estimation of this distribution is performed using variations of standard nonparametric methods. 
+Estimation of the specific batter-pitcher matchup involves batted-ball locations from three sources: 1) those from the batter under study vs the pitcher under study; 2) those from the batter under study vs a synthetic version of the pitcher under study; 3) those from a synthetic version of the batter under study vs the pitcher under study. Here the batted-ball locations corresponding to synthetic versions of the players under study are taken across all other MLB players, the locations are weighted to reflect similarity to the player under study where similarity ranges from 0 (not considered at all) to 1 (a clone of the player under study up to the information used to compute the similarity score). These three components represent separate spray chart distributions and they are combined through a convex combination with weights reflecting overall similarity of the synthetic players to those under study where these weights collapse on the specific batter-pitcher empirical spray distribution when enough data is available to reliably estimate this distribution. Mathematical justification for the combination of these estimated spray distributions is provided. We also demonstrate that our SEAM method outperforms the empirical batter or pitcher spray chart distributions through a detailed validation study in which we hold out data from the 2021 season and determine how well $(1-\alpha)\times 100\%$ highest density regions include the batted-ball locations from the held out data. SEAM exhibits nominal marginal coverage, but is no better than the existing batter or pitcher spray charts. SEAM dramatically outperforms batter or pitcher spray charts when we evaluate conditional coverage, indicating that our approach is better suited for predicting batted-ball locations when a particular batter faces a particular pitching. \textcolor{red}{add information about size of the regions}
 %We show that the coverage our method outperforms marginal batter and pitcher spray charts Through a cross-validation study in which 2021 seasonal data is held out 
 
 
@@ -143,26 +143,32 @@ Estimation of the specific batter-pitcher matchup involves batted-ball locations
 
 
 
-\section{Spray chart distributions and densities}
-
-A spray chart distribution for a batter is a distribution $F$ over a bounded subset $\Y \in \R^2$. The set $\Y$ contains plausible locations of batted balls from home plate. Let $(0,0) \in \Y$ denote the location of home plate. With this specification we can take $\Y = \{\y \in \R^2: \|\y\| \leq 1000\}$ where values in $\Y$ are locations in feet and $\|\cdot\|$ is the Euclidean norm. This specification of $\Y$ guarantees that $F(\Y) = 1$ for all batters in history. No human in history has ever come close to hitting a ball 1000 feet.
 
 
-Let $f$ be the spray chart density function corresponding to the spray chart distribution $F$ for the matchup between a particular pitcher and a particular batter. Let $(y_{1i},y_{2i}) \in \Y$, $i = 1, \ldots, n$, be the observed batted-ball locations for this matchup. We will estimate $f$ with a multivariate kernel density estimator
+
+\section{SEAM method}
+
+\subsection{Spray chart distribution preliminaries}
+
+
+In this article we seek to provide a batter-pitcher specific spray chart density which is more accurate than spray chart densities computed exclusively from either the batter or pitcher data. The densities that we compute correspond to what we call a spray chart distribution which is a spatial distribution over a bounded subset $\Y \in \R^2$. The set $\Y$ contains plausible locations of batted balls from home plate. In our application we will let $(0,0) \in \Y$ denote the location of home plate. A spray chart distribution for a batter is a distribution $F$ over a bounded subset $\Y \in \R^2$. The set $\Y$ contains plausible locations of batted balls from home plate. Let $(0,0) \in \Y$ denote the location of home plate. %With this specification we can take $\Y = \{\y \in \R^2: \|\y\| \leq 1000\}$ where values in $\Y$ are locations in feet and $\|\cdot\|$ is the Euclidean norm. This specification of $\Y$ guarantees that $F(\Y) = 1$ for all batters in history. No human in history has ever come close to hitting a ball 1000 feet.
+
+
+\subsection{Nonparametric estimation}
+
+A spray chart distribution $F$ is not likely to have a known parametric form so we will consider nonparametric estimation techniques to estimate spray chart densities $f$. The particular nonparametric estimation methods that we use are chosen for their computational speed and theoretical properties. Let $(y_{1i},y_{2i}) \in \Y$, $i = 1, \ldots, n$, be the observed batted-ball locations, then we will estimate $f$ with a multivariate kernel density estimator
 \begin{equation} \label{general}
   \hat f_\Hbf(\y) = \frac{1}{n|\Hbf|}\sum_{i=1}^{n} K\left(\Hbf^{-1}(\y_i - \y)\right),
   \qquad \y \in \Y,
 \end{equation}
-where $K$ is a multivariate kernel function and $\Hbf$ is a matrix of bandwidth parameters. Our implementation will estimate $f$ using the \texttt{kde2d} and \texttt{kde2d.weighted} functions in R \citep{MASS, ggtern}. These functions are chosen because of their presence in the \texttt{ggplot2} R package \citep{ggplot2} which will be employed for visualization. Therefore, we estimate $f$ using a bivariate nonparametric Gaussian kernel density estimator
+where $K$ is a multivariate kernel function and $\Hbf$ is a matrix of bandwidth parameters. Our implementation will estimate $f$ using variants of the \texttt{kde2d} and \texttt{kde2d.weighted} functions in R \citep{MASS, ggtern}. %These functions are chosen because of their presence in the \texttt{ggplot2} R package \citep{ggplot2} which will be employed for visualization. 
+Therefore, we estimate $f$ using a bivariate nonparametric Gaussian kernel density estimator
 \begin{equation} \label{spraydens}
   \hat f_\h(\y) =
     \frac{1}{n h_{y_1}h_{y_2}}\sum_{i=1}^{n} \phi\left(\frac{y_1 - y_{1i}}{h_{y_1}}\right)
       \phi\left(\frac{y_2 - y_{2i}}{h_{y_2}}\right),
 \end{equation}
 where $\y = (y_1, y_2) \in \Y$, $\phi$ is a standard Gaussian density, $\h \in \R^2$ is a bandwidth parameter so that the matrix $\Hbf$ in \eqref{general} is $\Hbf = \text{diag}(\h)$, and $\Hbf$ is chosen according to the default bandwidth selection procedures within the \texttt{kde2d} and \texttt{kde2d.weighted} functions. The estimated spray chart density function $\hat f_\h$ is a smoothed surface overlaying a spray chart. Our visualization of the spray chart distribution will be along $n_g$ common grid points $g_1,\ldots,g_{n_g}$ for all matchups under study. Commonality of grid points allows for straightforward comparisons of spray chart distributions in practice.
-
-
-
 
 We extend this framework to spray chart distributions that are conditional on several characteristics for pitchers $\x_p$ and batters $\x_b$, where $\x = (\x_p',\x_b')' \in \X$, and $\X$ is assumed to be bounded. Denote the conditional spray chart distribution as $F(\y|\x)$ for $\x \in \X$ and $\y \in \Y$. The conditional spray chart density function corresponding to $F(\y|\x)$ will be denoted as $f(\y|\x)$ for all $\x \in \X$ and $\y \in \Y$. Thus, $f(\y|\x)$ is a nonparametric regression model that we will again estimate with a bivariate nonparametric Gaussian kernel density estimator
 \begin{equation} \label{spraydens-cov}
@@ -173,19 +179,27 @@ We extend this framework to spray chart distributions that are conditional on se
 where the sample of batted-ball locations $(y_{1i},y_{2i}) \in \Y$, $i = 1, \ldots, n$ are now conditional on $\x \in \X$.
 
 
-\subsection{Synthetic player construction}
+\subsection{Similarity scores}
 
-We develop a method for synthetically recreating baseball players in order to alleviate the small sample size concerns inherent in the estimation of $f$ for any batter-pitcher matchup. Matchup data involving these synthetic players will then be included in our analysis to estimate $f$. We first develop the similarity scores used in this methodology. We will suppose that there are $J$ pitchers and $K$ batters available in our donor pool. We will suppose that the pitcher in the matchup under study throws $n_{\text{type}}$ different types of pitches. We will let $\x_{p,t}$ be the pitcher covariates for pitch type $t = 1,\ldots,n_{\text{type}}$. Similarly, let $\x_{b,t}$ be the batter covariates when facing pitch type $t = 1,\ldots,n_{\text{type}}$. The covariates in $\x_{p,t}$ and $\x_{b,t}$ are averages across the pitch-by-pitch realizations. We will denote $d_p$ and $d_b$ as the dimensions of $\x_{p,t}$ and $\x_{b,t}$ respectively. For a pitch type $t$, the similarity score of pitcher $j_1$ to pitcher $j_2$ is defined as $s(\x_{p,j_1,t}, \x_{p,j_2,t}) = \exp(-\|\x_{p,j_1,t}-\x_{p,j_2,t}\|_{\V_{p,t}})$ where $\x_{p,j_1,t}$ and $\x_{p,j_2,t}$ are, respectively, the underlying pitch characteristics for pitcher $j_1$ and $j_2$,
+The estimator \eqref{spraydens-cov} is often not feasible for $f(\cdot|\textbf{x})$ in practice since there is not enough individual matchup data. To alleviate this challenge we will incorporate batted-ball data from other matchups involving one of the batter or pitcher under study where the batted-ball locations from such matchups are weighted by their similarity to the matchup under study. Similarity will be assessed via similarity scores which are motivated by \cite{james1994politics} and \cite{PECOTA}.
+
+%We develop a method for synthetically recreating baseball players in order to alleviate the small sample size concerns inherent in the estimation of $f$ for any batter-pitcher matchup. Matchup data involving these synthetic players will then be included in our analysis to estimate $f$. These synthetic players require similarity scores to guauge how similar a player in a donor pool of players is to the player under study. These similarity scores are motivated by. 
+
+We now go over our procedure for determining similarity scores. We will suppose that there are $J$ pitchers who allowed a ball in play against the batter under study and $K$ batters who put a ball in play against the pitcher under study. We will suppose that the pitcher in the matchup under study throws $n_{\text{type}}$ different types of pitches. We will let $\x_{p,t}$ be the pitcher covariates for pitch type $t = 1,\ldots,n_{\text{type}}$. Similarly, let $\x_{b,t}$ be the batter covariates when facing pitch type $t = 1,\ldots,n_{\text{type}}$. The covariates in $\x_{p,t}$ and $\x_{b,t}$ are averages across the pitch-by-pitch realizations. We will denote $d_p$ and $d_b$ as the dimensions of $\x_{p,t}$ and $\x_{b,t}$ respectively. For a pitch type $t$, the similarity score of pitcher $j_1$ to pitcher $j_2$ is defined as $s(\x_{p,j_1,t}, \x_{p,j_2,t}) = \exp(-\|\x_{p,j_1,t}-\x_{p,j_2,t}\|_{\V_{p,t}})$ where $\x_{p,j_1,t}$ and $\x_{p,j_2,t}$ are, respectively, the underlying pitch characteristics for pitcher $j_1$ and $j_2$,
 \begin{equation} \label{Vpt}
    \|\x_{p,j_1,t}-\x_{p,j_2,t}\|_{\V_{p,t}}
      = \left((\x_{p,j_1,t}-\x_{p,j_2,t})'\V_{p,t}(\x_{p,j_1,t}-\x_{p,j_2,t})\right)^{1/d_p},
 \end{equation}
 and $\V_{p,t}$ is a diagonal weight matrix that is chosen to scale the pitch characteristics and give preference to pitch characteristics that are chosen to have higher influence on the spray chart distribution under study. Similarity scores of the form $s(\x_{p,j_1,t}, \x_{p,j_2,t})$ have desirable theoretical properties that are explained in the Appendix and, in practice, they guard against downplaying the effect of the players under study. Users of our Shiny app has some control of the entries of $\V_{p,t}$ by adjusting the pitcher slider. Similarity scores between batters $k_1$ and $k_2$ are defined in a similar manner and are noted as $s(\x_{b,k_1,t}, \x_{b,k_2,t})$.
 
-Implicit in this construction is the assumption that the collected pitcher and batter characteristics are an exhaustive set of inputs to properly estimate the spray chart distribution. Therefore, we are assuming that $f$ is conditional on $\x_{b,t}, \x_{p,t}, \rho_t$, for $t = 1,\ldots,n_{\text{type}}$, where $\rho_t$ be the proportion of time that the pitcher in the matchup under study throws pitch type $t$. We therefore represent $f(y)$ as $\sum_t \rho_t f(y|\x_t)$, where $\x_t = (\x_{p,t}', \x_{b,t}')'$.
+Implicit in this construction is the assumption that the collected pitcher and batter characteristics are an exhaustive set of inputs to properly estimate the spray chart distribution. Therefore, we are assuming that $f$ is conditional on $\x_{b,t}, \x_{p,t}, \rho_t$, for $t = 1,\ldots,n_{\text{type}}$, where $\rho_t$ be the proportion of time that a ball in play yielded by the pitcher in the matchup under study corresponds to pitch type $t$. We therefore represent $f(y)$ as $\sum_t \rho_t f(y|\x_t)$, where $\x_t = (\x_{p,t}', \x_{b,t}')'$.
 
 
-We describe the synthetic spray chart density for the batter under study facing the synthetic version of the pitcher under study. Without loss of generality, let $\x_{p,t}$ be the characteristics for pitch type $t$ thrown by the pitcher under study, let $\x_{b,t}$ be the characteristics for the batter under study. We then line up the pitcher characteristics for all of the pitchers in the donor pool, $\x_{p,j,t}$, $j = 1,...,J$. Now obtain the similarity scores $s_{p,j,t} = s(\x_{p,t},\x_{p,j,t})$ and then construct the weights $w_{p,j,t} = s_{p,j,t} / \sum_{l=1}^{J}s_{p,l,t}$, for $j = 1,...,J$. For pitch type $t$, the spray chart density for a batter facing the synthetic pitcher is
+\subsection{The SEAM density function}
+
+We now describe the construction of the SEAM density function. The SEAM density function is a linear combination of three density functions, the spray chart density $f(\cdot|\textbf{x})$, and two ``synthetic" player density functions, the synthetic pitcher density function $f_{\text{sp}}(\cdot|\textbf{x})$ and the synthetic batter density function $f_{\text{sb}}(\cdot|\textbf{x})$. Both $f_{\text{sp}}(\cdot|\textbf{x})$ and $f_{\text{sb}}(\cdot|\textbf{x})$ are weighted averages of densities spray chart densities corresponding to matchups in which the batter (pitcher) under study faces every other pitcher (batter). Attention is restricted to matchups that yielded a ball in play. We now describe these synthetic densities in more detail, describe their estimation, and present an estimator of the SEAM density function.
+
+Without loss of generality, let $\x_{p,t}$ be the characteristics for pitch type $t$ thrown by the pitcher under study, let $\x_{b,t}$ be the characteristics for the batter under study. We then line up the pitcher characteristics for all of the pitchers in the donor pool, $\x_{p,j,t}$, $j = 1,...,J$. Now obtain the similarity scores $s_{p,j,t} = s(\x_{p,t},\x_{p,j,t})$ and then construct the weights $w_{p,j,t} = s_{p,j,t} / \sum_{l=1}^{J}s_{p,l,t}$, for $j = 1,...,J$. For pitch type $t$, the spray chart density for a batter facing the synthetic pitcher is
 \begin{equation} \label{synth-pitch-t}
   f_{\text{sp}, t}(\y|\x_{b,t}) = \sum_{j=1}^J w_{p,j,t}f(\y|\x_{p,j,t},\x_{b,t}).
 \end{equation}
@@ -201,7 +215,7 @@ Similarly, we describe the synthetic spray chart density for the synthetic batte
 \end{equation}
 The spray chart density for the synthetic batter facing the pitcher under study is then
 \begin{equation} \label{synth-bat}
-  f_{\text{sb}}(\y) = \sum_{t=1}^{n_{\text{type}}} \rho_t f_{\text{sb},t}(\y|\x_{p,t)}.
+  f_{\text{sb}}(\y) = \sum_{t=1}^{n_{\text{type}}} \rho_t f_{\text{sb},t}(\y|\x_{p,t}).
 \end{equation}
 The conditioning on $\x_{p,t}, \x_{b,k,t}, \rho_t$, for $t = 1,\ldots,n_{\text{type}}$ and $k = 1,\ldots,K$ is suppressed in the density $f_{\text{sb}}(\y)$.
 
@@ -243,12 +257,36 @@ $n_b = \sum_t\rho_t\sum_{k=1}^K s_{b,k,t}^2n_{b,k,t}$.  These choices arise as a
 It is reasonable to assume that $n_{p,j,t} = O(n)$ and $n_{b,k,t} = O(n)$ for all $j = 1,\ldots,J$, all $k = 1,\ldots,K$, and all $t = 1,\ldots,n_{\text{type}}$. It is also reasonable to assume that $n$ will be too small to be of much use, hence the reason why $n_p$ and $n_b$ are aggregated with respect to similarity scores instead of weights that form a convex combination. However, in the event that $n$ is large enough to provide reliable estimation of $f(\y|\x)$ with $\hat f_h(\y|\x)$, then $n$ dominates $n_p$ and $n_b$. Formal technical justification for selecting $\lambdabf$ is given in the Appendix. In the Appendix we argue that our choices of $\lambdabf$ lead to the estimator \eqref{sd-implem} having a lower MSE than the estimator \eqref{spraydens}.
 
 
+\section{Validation}
+
+We evaluate the performance of our SEAM method through a validation approach in which we train the SEAM method on data through the 2020 season and then test the coverage of highest density regions with 2021 seasonal data. We define coverage as the proportion of batted balls that land in a location on the field that is within a level $\alpha$ highest density region. We consider both marginal and conditional coverage. Marginal coverage is assessed across all 2021 batted balls. Conditional coverage is assessed for 2021 batter-pitcher matchups that yielded 10 or more balls in play. Conditional coverage is then computed as the proportion of individual batter-pitcher coverages at or above the nominal level. 
+
+We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods.
+
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{l|rrr ||rrr }
+  & \multicolumn{3}{c||}{Marginal coverage} & \multicolumn{3}{|c}{Conditional coverage} \\
+  \hlinelevel  & 0.5 & 0.75 & 0.9 & 0.5 & 0.75 & 0.90 \\\hlineSEAM & 0.559 & 0.811 & 0.953 & 0.579 (0.035) & 0.641 (0.034) & 0.779 (0.030) \\
+e\_batter & 0.547 & 0.793 & 0.938 & 0.513 (0.036) & 0.574 (0.035) & 0.662 (0.034) \\
+e\_pitch & 0.541 & 0.788 & 0.935 & 0.549 (0.036) & 0.595 (0.035) & 0.713 (0.032) \\\end{tabular}		
+\end{center}
+\caption{Marginal and conditional coverage properties for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution (standard errors in parentheses).  }
+\label{Tab:coverage}
+\end{table}
+
+
+
+
+
 \section{Data considerations}
 
 Our methodology will consider the following variables comprising $\x_{p,t}$: velocity, spin rate, horizontal break, horizontal release angle, horizontal release point, vertical break, vertical release angle, vertical release point, and extension. Averages of these variables are taken across each pitcher-pitch type combination. Our methodology will consider the following variables comprising $\x_{b,t}$: exit velocity, launch angle, pull\%, middle\%, and oppo\%. Averages of these variables are taken across each batter-pitch type combination. One should note that these variables will not allow us to measure the complete talent profile of baseball players. %On average, players who hit the ball harder with a more optimized launch angle will receive better projected stats, since these balls tend to produce more home runs (and thus take fielders out of the equation). However,
 Tools such as speed and eye at the plate will not be fully captured by our methodology.
 
-Data for our app was acquired via the \texttt{baseballr} R package \citep{baseballr}. This dataset contains every pitch thrown since 2015 that has been captured by Statcast. A few preprocessing steps are involved:
+Data for our app was acquired via the \texttt{baseballr} R package \citep{baseballr}. This dataset contains every pitch thrown since 2017 that has been captured by Statcast. A few preprocessing steps are involved:
 \begin{itemize}
     \item Pitches classified as Eephus, Knuckleball, and Screwball are removed since these pitch types are rare.
     \item Pitches classified as Knuckle-Curve are renamed to Curveball.
@@ -268,9 +306,14 @@ Pitchers are aggregated on a season and pitch type basis and batters are aggrega
 
 
 
+
 \section{Shiny app}
 
-In this section we present a snapshot of what our Shiny app implementing SEAM methodology offers users. The Shiny app is available at \url{https://seam.stat.illinois.edu/app/}. The default matchup in the application pairs the 2019 American League Cy Young winner Justin Verlander against the 2019 American League MVP Mike Trout. The layout includes a sidebar with five filters: two dropdowns for batter/pitcher selection, two sliders for metric adjustment, and a dropdown to select the stadium appearance. A snapshot of the appearance of our visualization is depicted in Figures \ref{layout} and \ref{spraydists}.
+In this section we present a snapshot of what our Shiny app implementing SEAM methodology offers users. The Shiny app is available at 
+\begin{center}
+\url{https://seam.stat.illinois.edu/app/} 
+\end{center}
+The default matchup in the application pairs the 2019 American League Cy Young winner Justin Verlander against the 2019 American League MVP Mike Trout. The layout includes a sidebar with five filters: two dropdowns for batter/pitcher selection, two sliders for metric adjustment, and a dropdown to select the stadium appearance. A snapshot of the appearance of our visualization is depicted in Figures \ref{layout} and \ref{spraydists}.
 
 
 \begin{figure}
@@ -337,10 +380,10 @@ In this section we present a snapshot of what our Shiny app implementing SEAM me
 
 The pitcher slider allows users to determine the relative importance of ``stuff'', a colloquial term for pitch quality, versus release information. Stuff includes velocity, spin rate, and movement. Release includes release angles and release point. The batter slider allows users to determine the relative importance of launch conditions versus batted ball locations. Launch conditions includes exit velocity and launch angle. Location includes pull\%, middle\%, oppo\% (the percentage of batted balls place into the corresponding thirds of a baseball field). The default setting of the pitcher slider favors stuff over release information. The logic for this is quality of pitches being more representative of ability than release point. The default setting of the batter slider favors quality of contact over batted ball tendencies which appears to bias the synthetic batter's spray chart away from that of the batter under consideration. That being said, the batted ball tendencies are recorded as percentages of balls hit to six large grids on the baseball field, ignoring the quality, trajectory, and exact location of the batted ball. Thus, the quality of contact forms a more complete representation of a batter's skill than tendency.
 
-Note that the same slider weights are applied to each pitch type so that $V_{p,t} = V_p$ in \eqref{Vpt}, the same holds for batter characteristics. Additionally, our implementation calculates $\rho_t$ as the marginal proportion of pitch types computed across all pitches thrown by the pitcher under study. This design construction is appropriate for the descriptive nature of the analyses presented. For more prescriptive uses, one could adapt more flexible choices of $\rho_t$ to incorporate contextual information known about a batter-pitcher matchup, possibly in real time. Further note that pitch proportions are not considered in our similarity score constructions, therefore we are not accounting for the batter-pitcher meta game.
+Note that the same slider weights are applied to each pitch type so that $V_{p,t} = V_p$ in \eqref{Vpt}, the same holds for batter characteristics. Additionally, our implementation calculates $\rho_t$ as the marginal proportion of pitch types computed across all pitches thrown by the pitcher that yielded a ball in play. This design construction is appropriate for the descriptive nature of the analyses presented. For more prescriptive uses, one could adapt more flexible choices of $\rho_t$ to incorporate contextual information known about a batter-pitcher matchup, possibly in real time. Further note that pitch proportions are not considered in our similarity score constructions, therefore we are not accounting for the batter-pitcher meta game.
 
 
-As previously mentioned, these visualizations can help coaches position their fielders effectively. While a traditional spray chart may be useful in aggregate, building a custom spray chart to reflect a specific batter-pitcher matchup will yield more accurate results on a plate appearance by plate appearance level. This synthetically created spray chart will give the user an expected distribution of batted balls for the batter-pitcher matchup based on a combination of the distribution of similar batters against the pitcher, the distribution of similar pitchers against the batter, and the distribution of any observations of the pitcher vs batter since 2015. 
+As previously mentioned, these visualizations can help coaches position their fielders effectively. While a traditional spray chart may be useful in aggregate, building a custom spray chart to reflect a specific batter-pitcher matchup will yield more accurate results on a plate appearance by plate appearance level. This synthetically created spray chart will give the user an expected distribution of batted balls for the batter-pitcher matchup based on a combination of the distribution of similar batters against the pitcher, the distribution of similar pitchers against the batter, and the distribution of any observations of the pitcher vs batter since 2017. 
 
 This matchup presents a good example of how to interpret the resulting spray charts. Trout seems to be a pull-heavy hitter in general according to his traditional chart. When facing pitchers similar to Verlander, he seems to push the ball the opposite way. This may be explained by Verlander's high velocity fastball. In general, batters have a hard time ``getting around'' (pulling) an upper-90's fastball, so they end up hitting the ball to the opposite field. Given this spray chart distribution, a coach may position the shortstop more towards third base, the second baseman more up the middle, and the first baseman more towards second base. This will protect against Trout's usual habit of pulling the ball, and also put the first baseman in a position to cover the opposite field soft ground ball. If this decision were made just by Trout's traditional chart, the first baseman might not have been moved to cover ground balls through the right side.
 
@@ -348,11 +391,15 @@ This matchup presents a good example of how to interpret the resulting spray cha
 
 
 
+
+
+
+
 \section{Discussion}
 
-The primary contribution of this work is the development of SEAM methodology in which a synthetic spray chart density function $\hat{g}_{\lambdabf}(\y)$ is estimated. In our context of batter-pitcher matchups, this estimated density function is a weighted average of $\hat f_\h(\y|\x)$, $\hat f_{\text{sp}}(\y)$, and $\hat f_{\text{sb}}(\y)$, where these weights are chosen to minimize MSE under an assumed smooth function space. The synthetic players are constructed to best mimic the players under study. Our method of synthetic player construction is generalizable to other settings in baseball as well as other sports.
+The primary contribution of this work is the development of SEAM methodology in which a synthetic spray chart density function $\hat{g}_{\lambdabf}(\y)$ is estimated. In our context of batter-pitcher matchups, this estimated density function is a weighted average of $\hat f_\h(\y|\x)$, $\hat f_{\text{sp}}(\y)$, and $\hat f_{\text{sb}}(\y)$, where these weights are chosen to minimize MSE under an assumed smooth function space. The synthetic players are constructed to best mimic the players under study. It was demonstrated that our SEAM method provided more accurate predictions of future batted-ball locations than spray chart distributions computed from either the batter or pitcher in isolation. Our method of synthetic player construction is generalizable to other settings in baseball as well as other sports.
 
-We also developed a Shiny app which implements SEAM methodology. This app provides users with visual measures of batter-pitcher matchups and it will be of interest to the broad sports community. Our application shows users batter tendencies versus pitchers and greatly improves upon the inferential power of spray charts \citep{pettispray, marchi2019analyzing} as a visualization of a batter's talent and hitting tendencies. Spray charts may be uninformative for individual matchups due to a lack of data. Our synthetic player construction alleviates this problem.
+We also developed a Shiny app which implements our SEAM methodology. This app is very fast, providing users with visual measures of batter-pitcher matchups in seconds. Our app displays is a vast improvement upon empirical batter or pitcher spray charts which are computed marginally \citep{pettispray, marchi2019analyzing}. Additionally, matchup-specific spray charts are often not informative due to a lack of data. Our synthetic player construction alleviates this problem.
 
 We are not the first to incorporate additional players into an analysis via similarity scores with the understanding that doing so improves estimation performance. The PECOTA prediction methodology \citep{PECOTA} tries to forecast the ability of players using aggregate estimates obtained from other similar players. To the best of our knowledge, we are the first to base similarity scores exclusively on Statcast data which we believe provides a truer notion of talent similarity.
 
@@ -362,6 +409,13 @@ We are not the first to incorporate additional players into an analysis via simi
 %\section*{Acknowledgements}
 
 %We would like to thank ATLAS Infrastructure and Illini Analytics for computational resources that made our Shiny app possible. We would also like to thank Alan Nathan, Jim Albert, James Balamuta, Dootika Vats, John Marden, and Dave Zhao for helpful comments that improved our article and our Shiny app.
+
+
+
+
+\bibliographystyle{chicago}
+\bibliography{spray}
+
 
 
 \section*{Appendix: Justification for our choice of $\lambdabf$}
@@ -564,9 +618,6 @@ $$
 $$
 %The above is not always less than 0 for all configurations. However, it will be less than 0 when $n$ is comparable to $n_{p,j'}$ and $n_{b,k'}$, a setting that we will guard against in our implementation by specifying a minimal sample size to enter into available player pool.
 Our choices of the elements of $\lambdabf$ will work well in the presence or absence of pitchers and batters that recover the traits of the players under study. Less is known about middle ground cases, especially when sample sizes are are small.
-
-\bibliographystyle{chicago}
-\bibliography{spray}
 
 
 \end{document}
