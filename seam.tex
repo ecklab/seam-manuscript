@@ -276,14 +276,26 @@ pitcher & 0.541 & 0.788 & 0.935 & 0.549 (0.036) & 0.595 (0.035) & 0.713 (0.032) 
 
 We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods. 
 
-That being said, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the square that contains the playing filed while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n$ grids containing the highest probable batted ball locations as estimated by each method. We then assess the conditional coverage of these fixed-sized regions. What we find is that SEAM fixed-size region beats its competitors more often than not, and its success is often usefully higher than the other methods. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}.
+That being said, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the square that contains the playing filed while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. 
+
+We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n$ grids containing the highest probable batted ball locations as estimated by each method. We then assess the conditional coverage of these fixed-sized regions. What we find is that SEAM fixed-size region beats its competitors more often than not, and its success is often usefully higher than the other methods. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}, and Figure~\ref{Fig:fixed-size}.
 
 \begin{table}
 \begin{tabular}{l|rr|rr|rr}  & \multicolumn{2}{c|}{SEAM} & \multicolumn{2}{c|}{pitcher} & \multicolumn{2}{c}{batter}\\
-  & coverage & prob. mass  & coverage & prob. mass  & coverage & prob. mass  \\\hlinen = 1000 & 0.530 & 0.478 & 0.522 & 0.492 & 0.526 & 0.478 \\\hlinen = 2000 & 0.758 & 0.709 & 0.741 & 0.721 & 0.750 & 0.710 \\\hlinen = 3000 & 0.912 & 0.859 & 0.896 & 0.868 & 0.913 & 0.862\\\hline\end{tabular}
+  & coverage & prob. mass  & coverage & prob. mass  & coverage & prob. mass  \\\hline$n = 1000$ & 0.530 & 0.478 & 0.522 & 0.492 & 0.526 & 0.478 \\\hline$n = 2000$ & 0.758 & 0.709 & 0.741 & 0.721 & 0.750 & 0.710 \\\hline$n = 3000$ & 0.912 & 0.859 & 0.896 & 0.868 & 0.913 & 0.862\\\hline\end{tabular}
 \caption{Conditional coverage and cumulative probability mass of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
 \label{Tab:fixed-size}
 \end{table}
+
+
+
+\begin{figure}[t!]
+\begin{center}
+\includegraphics[width=0.80\textwidth]{coverage_size.pdf}	
+\end{center}	
+\caption{Conditional coverage and cumulative probability mass of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
+\label{Fig:fixed-size}
+\end{figure}
 
 \section{Data considerations}
 
