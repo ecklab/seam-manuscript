@@ -70,7 +70,7 @@
 
 \title{SEAM methodology for context-rich player matchup evaluations in baseball}
 \author{Julia Wapner\thanks{jwapner2@illinois.edu}, 
-Charlie Young\thanks{cdy2@illinois.edu}, 
+%Charlie Young\thanks{cdy2@illinois.edu}, 
 David Dalpiaz\thanks{dalpiaz2@illinois.edu},
 and Daniel J. Eck\thanks{dje13@illinois.edu} \\[1em]
 Department of Statistics, University of Illinois Urbana-Champaign
@@ -304,10 +304,10 @@ We then assess the average conditional coverage of these fixed-sized regions. Wh
 
 \section{Data considerations}
 
-Our methodology will consider the following variables comprising $\x_{p,t}$: velocity, spin rate, horizontal break, horizontal release angle, horizontal release point, vertical break, vertical release angle, vertical release point, and extension. Averages of these variables are taken across each pitcher-pitch type combination. Our methodology will consider the following variables comprising $\x_{b,t}$: exit velocity, launch angle, left\%, center\%, and right\%. Averages of these variables are taken across each batter-pitch type combination. One should note that these variables will not allow us to measure the complete talent profile of baseball players. %On average, players who hit the ball harder with a more optimized launch angle will receive better projected stats, since these balls tend to produce more home runs (and thus take fielders out of the equation). However,
+Our methodology will consider the following variables comprising $\x_{p,t}$: velocity, spin rate, horizontal break, horizontal release angle, horizontal release point, vertical break, vertical release angle, vertical release point, and extension. Averages of these variables are taken across each pitcher-pitch type-year combination. Our methodology will consider the following variables comprising $\x_{b,t}$: exit velocity, launch angle, left\%, center\%, and right\%. Averages of these variables are taken across each batter-pitch type-year combination. One should note that these variables will not allow us to measure the complete talent profile of baseball players. %On average, players who hit the ball harder with a more optimized launch angle will receive better projected stats, since these balls tend to produce more home runs (and thus take fielders out of the equation). However,
 Tools such as speed and eye at the plate will not be fully captured by our methodology.
 
-Data for our web application was acquired via the \texttt{baseballr} R package \citep{baseballr}. This dataset contains every pitch thrown since 2017 that has been captured by Statcast. A few preprocessing steps are involved:
+Data for our web application was acquired via Statcast \citep{statcast}. Our data set contains every pitch that was thrown since 2017. We ignored Statcast data pre-2017 due to data integrity issues. A few preprocessing steps are involved:
 \begin{itemize}
     \item Pitches classified as Eephus, Knuckleball, and Screwball are removed since these pitch types are rare.
     \item Pitches classified as Knuckle-Curve are renamed to Curveball.
@@ -318,11 +318,13 @@ Data for our web application was acquired via the \texttt{baseballr} R package \
             \item $launch_v = \arctan\left(\frac{vz_r}{\sqrt{vx_r^2 + vy_r^2}}\right)$
         \end{itemize}
         where $vx_r$, $vy_r$, $vz_r$ are, respectively, the $x$, $y$, $z$ components of release velocity.
-    \item Batted ball locations are adjusted to reflect accurate baseball field coordinates \citep{petti2017research}.
-    \item Spray angle is calculated from the $x$ and $y$ coordinates of the batted ball (what we previously called $y_1$ and $y_2$).
+    \item Batted ball locations are adjusted to make home plate the origin $(0,0)$ \citep{petti2017research}.
+    \item Spray angle \citep{petti2017research} is calculated from the $x$ and $y$ coordinates of the batted ball locations (what we previously called $y_1$ and $y_2$).
+    \item Data was limited to regular season batter-pitcher matchups. 
+    \item Sacrifice hits and sacrifice flies are removed from consideration.
 \end{itemize}
 
-Pitchers and batters are aggregated on a season, handedness, and pitch type basis. To be eligible for comparison, a pitcher must share at least  $\lceil \frac{n_{\text{type}}}{2} \rceil$ pitches with the pitcher under study.
+Pitchers and batters are aggregated on a season, handedness, and pitch type basis. %To be eligible for comparison, a pitcher must share at least  $\lceil \frac{n_{\text{type}}}{2} \rceil$ pitches with the pitcher under study.
 
 
 
