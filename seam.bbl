@@ -1,132 +1,146 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[\protect\citeauthoryear{Albert}{Albert}{2006}]{albert2006pitching}
-Albert, J. (2006).
+\bibitem[Albert(2006)]{albert2006pitching}
+J.~Albert.
 \newblock Pitching statistics, talent and luck, and the best strikeout seasons
   of all-time.
-\newblock {\em Journal of Quantitative Analysis in Sports\/}~{\em 2\/}(1).
+\newblock \emph{Journal of Quantitative Analysis in Sports}, 2\penalty0 (1),
+  2006.
 
-\bibitem[\protect\citeauthoryear{Baccellieri}{Baccellieri}{2022}]{baccellieri2022infield}
-Baccellieri, E. (2022).
+\bibitem[Baccellieri(2022)]{baccellieri2022infield}
+Emma Baccellieri.
 \newblock Infield shifts are increasing in the final season before mlb
   restricts them.
-\newblock \url{https://www.si.com/mlb/2022/04/26/shifts-increasing-the-opener}.
+\newblock \url{https://www.si.com/mlb/2022/04/26/shifts-increasing-the-opener},
+  2022.
 \newblock Accessed: 2022-06-13.
 
-\bibitem[\protect\citeauthoryear{Baseball-Prospectus}{Baseball-Prospectus}{2022}]{bp}
-Baseball-Prospectus (2022).
-\newblock \url{https://www.baseballprospectus.com/}.
+\bibitem[Baseball-Prospectus(2022)]{bp}
+Baseball-Prospectus.
+\newblock \url{https://www.baseballprospectus.com/}, 2022.
 \newblock Accessed: 2022-06-13.
 
-\bibitem[\protect\citeauthoryear{Baseball-Reference}{Baseball-Reference}{2022}]{bref}
-Baseball-Reference (2022).
-\newblock \url{https://www.baseball-reference.com}.
+\bibitem[Baseball-Reference(2022)]{bref}
+Baseball-Reference.
+\newblock \url{https://www.baseball-reference.com}, 2022.
 \newblock Accessed: 2022-06-13.
 
-\bibitem[\protect\citeauthoryear{Baseball-Savant}{Baseball-Savant}{2014}]{statcast}
-Baseball-Savant (2014).
+\bibitem[Baseball-Savant(2014)]{statcast}
+Baseball-Savant.
 \newblock Statcast.
-\newblock \url{https://baseballsavant.mlb.com/}.
+\newblock \url{https://baseballsavant.mlb.com/}, 2014.
 \newblock Accessed: 2022-06-13.
 
-\bibitem[\protect\citeauthoryear{Baumer, Jensen, and Matthews}{Baumer
-  et~al.}{2015}]{baumer2015openwar}
-Baumer, B.~S., S.~T. Jensen, and G.~J. Matthews (2015).
+\bibitem[Baumer et~al.(2015)Baumer, Jensen, and Matthews]{baumer2015openwar}
+B.~S. Baumer, S.~T. Jensen, and G.~J. Matthews.
 \newblock openwar: An open source system for evaluating overall player
   performance in major league baseball.
-\newblock {\em Journal of Quantitative Analysis in Sports\/}~{\em 11\/}(2),
-  69--84.
+\newblock \emph{Journal of Quantitative Analysis in Sports}, 11\penalty0
+  (2):\penalty0 69--84, 2015.
 
-\bibitem[\protect\citeauthoryear{Berry, Reese, and Larkey}{Berry
-  et~al.}{1999}]{berry1999bridging}
-Berry, S.~M., C.~S. Reese, and P.~D. Larkey (1999).
+\bibitem[Berry et~al.(1999)Berry, Reese, and Larkey]{berry1999bridging}
+S.~M. Berry, C.~S. Reese, and P.~D. Larkey.
 \newblock Bridging different eras in sports.
-\newblock {\em Journal of the American Statistical Association\/}~{\em
-  94\/}(447), 661--676.
+\newblock \emph{Journal of the American Statistical Association}, 94\penalty0
+  (447):\penalty0 661--676, 1999.
 
-\bibitem[\protect\citeauthoryear{Brown}{Brown}{2008}]{brown2008season}
-Brown, L.~D. (2008).
+\bibitem[Brown(2008)]{brown2008season}
+L.~D. Brown.
 \newblock In-season prediction of batting averages: A field test of empirical
   bayes and bayes methodologies.
-\newblock {\em The Annals of Applied Statistics\/}, 113--152.
+\newblock \emph{The Annals of Applied Statistics}, pages 113--152, 2008.
 
-\bibitem[\protect\citeauthoryear{Fangraphs}{Fangraphs}{2022}]{fangraphs}
-Fangraphs (2022).
-\newblock \url{https://www.fangraphs.com}.
+\bibitem[Fangraphs(2022)]{fangraphs}
+Fangraphs.
+\newblock \url{https://www.fangraphs.com}, 2022.
 \newblock Accessed: 2022-06-13.
 
-\bibitem[\protect\citeauthoryear{Hamilton}{Hamilton}{2018}]{ggtern}
-Hamilton, N. (2018).
-\newblock {\em ggtern: An Extension to 'ggplot2', for the Creation of Ternary
-  Diagrams}.
+\bibitem[Hamilton(2018)]{ggtern}
+N.~Hamilton.
+\newblock \emph{ggtern: An Extension to 'ggplot2', for the Creation of Ternary
+  Diagrams}, 2018.
 
-\bibitem[\protect\citeauthoryear{info solutions}{info solutions}{2022}]{BIS}
-info solutions, B. (2022).
-\newblock \url{www.baseballinfosolutions.comm}.
+\bibitem[info solutions(2022)]{BIS}
+Baseball info solutions.
+\newblock \url{www.baseballinfosolutions.comm}, 2022.
 \newblock Accessed: 2022-06-13.
 
-\bibitem[\protect\citeauthoryear{James}{James}{1994}]{james1994politics}
-James, B. (1994).
-\newblock {\em The politics of glory: how baseball's Hall of Fame really
+\bibitem[James(1994)]{james1994politics}
+B.~James.
+\newblock \emph{The politics of glory: how baseball's Hall of Fame really
   works}.
-\newblock Macmillan.
+\newblock Macmillan, 1994.
 
-\bibitem[\protect\citeauthoryear{Jensen, McShane, and Wyner}{Jensen
-  et~al.}{2009}]{jensen2009hierarchical}
-Jensen, S.~T., B.~B. McShane, and A.~J. Wyner (2009).
+\bibitem[Jensen et~al.(2009{\natexlab{a}})Jensen, McShane, and
+  Wyner]{jensen2009hierarchical}
+S.~T. Jensen, B.~B. McShane, and A.~J. Wyner.
 \newblock Hierarchical bayesian modeling of hitting performance in baseball.
-\newblock {\em Bayesian Analysis\/}~{\em 4\/}(4), 631--652.
+\newblock \emph{Bayesian Analysis}, 4\penalty0 (4):\penalty0 631--652,
+  2009{\natexlab{a}}.
 
-\bibitem[\protect\citeauthoryear{Jensen, Shirley, and Wyner}{Jensen
-  et~al.}{2009}]{jensen2009bayesball}
-Jensen, S.~T., K.~E. Shirley, and A.~J. Wyner (2009).
+\bibitem[Jensen et~al.(2009{\natexlab{b}})Jensen, Shirley, and
+  Wyner]{jensen2009bayesball}
+S.~T. Jensen, K.~E. Shirley, and A.~J. Wyner.
 \newblock Bayesball: A bayesian hierarchical model for evaluating fielding in
   major league baseball.
-\newblock {\em The Annals of Applied Statistics\/}~{\em 3\/}(2), 491--520.
+\newblock \emph{The Annals of Applied Statistics}, 3\penalty0 (2):\penalty0
+  491--520, 2009{\natexlab{b}}.
 
-\bibitem[\protect\citeauthoryear{Lewis}{Lewis}{2004}]{lewis2004moneyball}
-Lewis, M. (2004).
-\newblock {\em Moneyball: The art of winning an unfair game}.
-\newblock WW Norton \& Company.
+\bibitem[Lewis(2004)]{lewis2004moneyball}
+Michael Lewis.
+\newblock \emph{Moneyball: The art of winning an unfair game}.
+\newblock WW Norton \& Company, 2004.
 
-\bibitem[\protect\citeauthoryear{Marchi, Albert, and Baumer}{Marchi
-  et~al.}{2019}]{marchi2019analyzing}
-Marchi, M., J.~Albert, and B.~S. Baumer (2019).
-\newblock {\em Analyzing baseball data with R 2nd Edition}.
-\newblock CRC Press.
+\bibitem[Marchi et~al.(2019)Marchi, Albert, and Baumer]{marchi2019analyzing}
+M.~Marchi, J.~Albert, and B.~S. Baumer.
+\newblock \emph{Analyzing baseball data with R 2nd Edition}.
+\newblock CRC Press, 2019.
 
-\bibitem[\protect\citeauthoryear{Petti}{Petti}{2009}]{pettispray}
-Petti, B. (2009).
+\bibitem[Petti(2009)]{pettispray}
+B.~Petti.
 \newblock The interactive spray chart tool.
-\newblock \url{https://billpetti.shinyapps.io/shiny_spraychart/}.
+\newblock \url{https://billpetti.shinyapps.io/shiny_spraychart/}, 2009.
 \newblock Accessed: 2020-04-29.
 
-\bibitem[\protect\citeauthoryear{Petti}{Petti}{2017}]{petti2017research}
-Petti, B. (2017).
+\bibitem[Petti(2017)]{petti2017research}
+B.~Petti.
 \newblock Research notebook: New format for statcast data export at baseball
   savant.
-\newblock {\em The Hardball Times\/}.
+\newblock \emph{The Hardball Times}, 2017.
 
-\bibitem[\protect\citeauthoryear{Piette and Jensen}{Piette and
-  Jensen}{2012}]{piette2012estimating}
-Piette, J. and S.~T. Jensen (2012).
+\bibitem[Piette and Jensen(2012)]{piette2012estimating}
+J.~Piette and S.~T. Jensen.
 \newblock Estimating fielding ability in baseball players over time.
-\newblock {\em Journal of Quantitative Analysis in Sports\/}~{\em 8\/}(3).
+\newblock \emph{Journal of Quantitative Analysis in Sports}, 8\penalty0 (3),
+  2012.
 
-\bibitem[\protect\citeauthoryear{Ripley, Venables, Bates, Hornik, Gebhardt, and
-  Firth}{Ripley et~al.}{2019}]{MASS}
-Ripley, B., B.~Venables, D.~Bates, K.~Hornik, A.~Gebhardt, and D.~Firth (2019).
-\newblock {\em MASS: R package}.
+\bibitem[Ripley et~al.(2019)Ripley, Venables, Bates, Hornik, Gebhardt, and
+  Firth]{MASS}
+B.~Ripley, B.~Venables, D.~Bates, K.~Hornik, A.~Gebhardt, and D.~Firth.
+\newblock \emph{MASS: R package}, 2019.
 
-\bibitem[\protect\citeauthoryear{Schwarz}{Schwarz}{2004}]{schwarz2004numbers}
-Schwarz, A. (2004).
-\newblock {\em The numbers game: Baseball's lifelong fascination with
+\bibitem[Schwarz(2004)]{schwarz2004numbers}
+A.~Schwarz.
+\newblock \emph{The numbers game: Baseball's lifelong fascination with
   statistics}.
-\newblock Macmillan.
+\newblock Macmillan, 2004.
 
-\bibitem[\protect\citeauthoryear{Silver}{Silver}{2003}]{PECOTA}
-Silver, N. (2003).
+\bibitem[Silver(2003)]{PECOTA}
+N.~Silver.
 \newblock Introducing pecota.
-\newblock {\em Baseball Prospectus\/}, 507--514.
+\newblock \emph{Baseball Prospectus}, pages 507--514, 2003.
+
+\bibitem[Yan et~al.(2022)Yan, Burgos~Jr, Kinson, Niedert, and
+  Eck]{yan2022comparing}
+Shen Yan, Adrian Burgos~Jr, Christopher Kinson, Brandon Niedert, and Daniel~J
+  Eck.
+\newblock Comparing baseball players across eras via the novel full house
+  model.
+\newblock \emph{arXiv preprint arXiv:2207.11332}, 2022.
 
 \end{thebibliography}

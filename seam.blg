@@ -1,55 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2021)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: seam.aux
-The style file: chicago.bst
+The style file: plainnat.bst
 Database file #1: spray.bib
-Warning--page numbers missing in albert2006pitching
-Warning--no number and no volume in brown2008season
-Warning--empty organization in ggtern
-Warning--no number and no volume in petti2017research
-Warning--page numbers missing in petti2017research
-Warning--page numbers missing in piette2012estimating
-Warning--empty organization in MASS
-Warning--no number and no volume in PECOTA
-You've used 22 entries,
-            2861 wiz_defined-function locations,
-            721 strings with 7448 characters,
-and the built_in function-call counts, 12597 in all, are:
-= -- 1021
-> -- 859
-< -- 0
-+ -- 238
-- -- 296
-* -- 1018
-:= -- 2427
-add.period$ -- 67
-call.type$ -- 22
-change.case$ -- 138
+You've used 23 entries,
+            2773 wiz_defined-function locations,
+            705 strings with 7633 characters,
+and the built_in function-call counts, 8660 in all, are:
+= -- 755
+> -- 426
+< -- 18
++ -- 153
+- -- 129
+* -- 592
+:= -- 1351
+add.period$ -- 70
+call.type$ -- 23
+change.case$ -- 102
 chr.to.int$ -- 22
-cite$ -- 30
-duplicate$ -- 363
-empty$ -- 788
-format.name$ -- 324
-if$ -- 2245
-int.to.chr$ -- 1
-int.to.str$ -- 0
-missing$ -- 17
-newline$ -- 114
-num.names$ -- 220
-pop$ -- 108
+cite$ -- 46
+duplicate$ -- 440
+empty$ -- 780
+format.name$ -- 154
+if$ -- 1816
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 18
+newline$ -- 124
+num.names$ -- 92
+pop$ -- 258
 preamble$ -- 1
-purify$ -- 280
+purify$ -- 89
 quote$ -- 0
-skip$ -- 384
+skip$ -- 338
 stack$ -- 0
-substring$ -- 590
-swap$ -- 118
-text.length$ -- 0
+substring$ -- 204
+swap$ -- 45
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 400
-warning$ -- 8
-while$ -- 208
+type$ -- 233
+warning$ -- 0
+while$ -- 83
 width$ -- 0
-write$ -- 290
-(There were 8 warnings)
+write$ -- 293
