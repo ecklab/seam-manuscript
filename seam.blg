@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: seam.aux
+The style file: chicago.bst
+Database file #1: spray.bib
+Warning--page numbers missing in albert2006pitching
+Warning--no number and no volume in brown2008season
+Warning--empty organization in ggtern
+Warning--no number and no volume in petti2017research
+Warning--page numbers missing in petti2017research
+Warning--page numbers missing in piette2012estimating
+Warning--empty organization in MASS
+Warning--no number and no volume in PECOTA
+You've used 22 entries,
+            2861 wiz_defined-function locations,
+            721 strings with 7448 characters,
+and the built_in function-call counts, 12597 in all, are:
+= -- 1021
+> -- 859
+< -- 0
++ -- 238
+- -- 296
+* -- 1018
+:= -- 2427
+add.period$ -- 67
+call.type$ -- 22
+change.case$ -- 138
+chr.to.int$ -- 22
+cite$ -- 30
+duplicate$ -- 363
+empty$ -- 788
+format.name$ -- 324
+if$ -- 2245
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 17
+newline$ -- 114
+num.names$ -- 220
+pop$ -- 108
+preamble$ -- 1
+purify$ -- 280
+quote$ -- 0
+skip$ -- 384
+stack$ -- 0
+substring$ -- 590
+swap$ -- 118
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 400
+warning$ -- 8
+while$ -- 208
+width$ -- 0
+write$ -- 290
+(There were 8 warnings)
