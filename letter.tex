@@ -6,7 +6,14 @@
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage[export]{adjustbox}
-
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+  linkcolor  = blue,
+  citecolor  = blue,
+  urlcolor   = blue,
+  colorlinks = true,
+} % color setup
 
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
@@ -41,9 +48,11 @@ Dear Editor:
 
 We are submitting our manuscript ``SEAM methodology for context-rich player matchup evaluations in baseball'' for your consideration at the American Statistician. This manuscript is at the interface between statistical methodology and a current baseball industry problem involving the estimation and prediction of batted-ball locations. 
 
-In this paper we develop the SEAM method as a technique for estimated the batted-ball distribution for a matchup involving a specific batter and pitcher. Our method overcomes the challenge of sparse matchup data by pooling in batted-ball locations of other players that are weighted by similarity. Mathematical justification for this method is provided. A detailed validation study reveals that our SEAM approach more accurately predicts the locations of batted-ball locations than existing publicly available methods.
+In this manuscript we develop the SEAM method as a technique for estimating the batted-ball distribution for a matchup involving a specific batter and pitcher. Our method overcomes the challenge of sparse matchup data by pooling batted-ball locations of other players that are weighted by similarity. Mathematical justification for this method is provided. A detailed validation study reveals that our SEAM approach more accurately predicts the locations of batted-ball locations than existing publicly available methods.
 
-This manuscript has not been published elsewhere, and it has not been submitted for publication elsewhere.
+Included with this submission is a Shiny web application \url{https://deck13.shinyapps.io/seam/} that implements and provides visualizations of our SEAM methodology. This web application is fast, providing users with visual measures of batter-pitcher matchups nearly instantaneously.
+
+This manuscript has not been published elsewhere, and it is not currently submitted for publication elsewhere.
 
 Thank you for your consideration.
 

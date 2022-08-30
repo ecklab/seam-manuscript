@@ -13,6 +13,7 @@
 \usepackage{natbib}
 \usepackage{url}
 \usepackage{bm}
+\usepackage{setspace}
 
 \usepackage{geometry}
 \usepackage[usenames]{color}
@@ -85,14 +86,14 @@
 
 \begin{abstract}
 We develop the SEAM (synthetic estimated average matchup) method for describing batter versus pitcher matchups in baseball. We first estimate the distribution of balls put into play by a batter facing a pitcher, called the empirical spray chart distribution. Many individual matchups have a sample size that is too small to be reliable for use in predicting future outcomes. Synthetic versions of the batter and pitcher under consideration are constructed in order to alleviate these concerns. Weights governing how much influence these synthetic players have on the overall estimated spray chart distribution are constructed to minimize expected mean square error. We provide a Shiny web application that allows users to visualize and evaluate any batter-pitcher matchup that has occurred or could have occurred during the Statcast era (specifically 2017-present). This methodology and web application could be used to determine defensive alignments, lineup construction, or pitcher selection through estimation of spray densities based on any input matchup. One can access this web application at \begin{center}
-%\url{https://seam.stat.illinois.edu/}
-\end{center} 
+	\url{https://deck13.shinyapps.io/seam/}
+	\end{center} 
 The computational speed with which the method calculates the spray densities allows the app to display the visualizations for any input almost instantly. Therefore, SEAM offers distributional interpretations of dependent matchup data which is computationally fast.
 \end{abstract}
 
 \noindent\textbf{Keywords}: Nonparametric density estimation; Similarity scores; Model averaging; Reproducible research; Sabermetrics; Big data applications and visualization
 
-
+\doublespacing
 \section{Introduction}
 
 
@@ -268,6 +269,8 @@ It is reasonable to assume that $n_{p,j,t} = O(n)$ and $n_{b,k,t} = O(n)$ for al
 
 We evaluate the performance of our SEAM method through a validation approach in which we train the SEAM method on data through the 2020 season and then test the coverage of highest density regions with 2021 data. We define coverage as the proportion of batted balls that land in a location on the field that is within a level $\alpha$ highest density region. We consider both marginal and conditional coverage. Marginal coverage is assessed across all 2021 batted balls. Conditional coverage is assessed for 2021 batter-pitcher matchups that yielded 10 or more balls in play. We compute the proportion of individual batter-pitcher conditional coverages that at or above the nominal level, which we call conditional coverage success rate.
 
+We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts which are estimated marginally across all pitchers and batters respectively using similar nonparametric estimation techniques. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods. 
+
 \begin{table}
 \begin{center}
 \begin{tabular}{l|rrr ||rrr }
@@ -280,20 +283,20 @@ pitcher & 0.541 & 0.788 & 0.935 & 0.549 (0.036) & 0.595 (0.035) & 0.713 (0.032) 
 \label{Tab:coverage}
 \end{table}
 
-
-We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts which are estimated marginally across all pitchers and batters respectively using similar nonparametric estimation techniques. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods. 
-
 However, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the rectangle that contains the playing filed while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. 
 
 We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n$ grids containing the highest probable batted ball locations as estimated by each method. Calculating average conditional coverages for fixed-size regions is an important consideration for fielding placement due to the physical constraint on how much of the baseball field defenders can reasonably cover. We considered [1500, 2500] as a range for the number of grids. This range corresponds to fixed-size regions that cover approximately [50\%,\;80\%] of fair territory of a baseball field that is 115,000 square feet. 
 We then assess the average conditional coverage of these fixed-size regions. What we find is that the SEAM fixed-size region has higher average conditional coverage than its competitors which ignore matchup considerations. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}, and Figure~\ref{Fig:fixed-size}. 
 
-%\begin{table}
-%\begin{tabular}{l|rr|rr|rr}%  & \multicolumn{2}{c|}{SEAM} & \multicolumn{2}{c|}{pitcher} & \multicolumn{2}{c}{batter}\\
-%  & coverage & prob. mass  & coverage & prob. mass  & coverage & prob. mass  \\%\hline%$n = 1000$ & 0.530 & 0.478 & 0.522 & 0.492 & 0.526 & 0.478 \\%\hline%$n = 2000$ & 0.758 & 0.709 & 0.741 & 0.721 & 0.750 & 0.710 \\%\hline%$n = 3000$ & 0.912 & 0.859 & 0.896 & 0.868 & 0.913 & 0.862\\%\hline%\end{tabular}
-%\caption{Conditional coverage and cumulative probability mass of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
-%\label{Tab:fixed-size}
-%\end{table}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.80\textwidth]{coverage_size.pdf}	
+\end{center}	
+\caption{Average conditional coverage of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
+\label{Fig:fixed-size}
+\end{figure}
+
 
 \begin{table}
 \begin{center}
@@ -315,13 +318,6 @@ We then assess the average conditional coverage of these fixed-size regions. Wha
 \end{table}
 
 
-\begin{figure}[t!]
-\begin{center}
-\includegraphics[width=0.80\textwidth]{coverage_size.pdf}	
-\end{center}	
-\caption{Average conditional coverage of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
-\label{Fig:fixed-size}
-\end{figure}
 
 \section{Data considerations}
 
@@ -354,9 +350,9 @@ Pitchers and batters are aggregated on a season, handedness, and pitch type basi
 \section{Interactive web application}
 
 In this section we present a snapshot of what our Shiny web application implementing SEAM methodology offers users. The web application is available at 
-%\begin{center}
-%\url{https://seam.stat.illinois.edu/} 
-%\end{center}
+\begin{center}
+\url{https://deck13.shinyapps.io/seam/} 
+\end{center}
 The default matchup in the web application pairs the 2019 American League Cy Young winner Justin Verlander against the 2019 American League MVP Mike Trout, two of the greatest players of all-time \citep{yan2022comparing}. Note that our matchup will assess the outcomes currently, rather than during their award winning seasons. The layout includes a sidebar with five filters: two dropdowns for batter/pitcher selection, two sliders for metric adjustment, and a dropdown to select the stadium appearance. A snapshot of the appearance of our visualization is depicted in Figures \ref{layout} and \ref{spraydists}.
 
 
@@ -388,39 +384,7 @@ The default matchup in the web application pairs the 2019 American League Cy You
 }
     \label{spraydists}
 \end{figure}
-%\begin{figure}
-%\centering
-%    \includegraphics[width=3in, height=2in]{synthetic_trout.png}
-%    \caption{Mike Trout's synthetic spray chart versus Justin Verlander}
-%\end{figure}
-%\begin{figure}
-%\centering
-%    \includegraphics[width=3in, height=2in]{synthetic_verlander.png}
-%    \caption{Justin Verlander's synthetic spray chart versus Mike Trout}
-%\end{figure}
-%\begin{figure}
-%\centering
-%    \includegraphics[width=3in, height=2in]{trout_verlander_master.png}
-%    \caption{The complete synthetic spray chart for Mike Trout versus Justin Verlander}
-%\end{figure}
 
-
-
-%\noindent Some things to do:
-%\begin{itemize}
-%\item[1.] Find one or two interesting matchups. Include pictures of the display \\
-
-%\item[2.] Explain what the sliders do and why they are important. \\
-%One slider changes the ratio of pitcher “stuff” to release metrics. Stuff includes velocity, spin %rate, and movement. Release includes release angles and release point.
-%One slider changes the ratio of batter launch conditions to location. Launch conditions includes %exit velocity and launch angle. Location includes pull\%, middle\%, oppo\%. These can be used to %tailor the comparisons - for example, it may be more useful to weight batted ball location higher %to alter infielder position, while it may be more useful to weight launch conditions higher to alter outfielder depth.
-
-%\item[3.] Explain why these visualizations and metrics offer users. \\
-%As mentioned above, these visualizations can help coaches position their fielders effectively. While a traditional spray chart may be useful in aggregate, building a custom spray chart to reflect a specific pitcher-batter matchup will yield more accurate results on a plate appearance by plate appearance level.
-
-%\item[4.] Highlight that the Shiny app displays the most similar players. \\
-%Below the two synthetic charts, there is a leaderboard displaying the most similar pitchers/batters. %These include their similarity and a variety of performance metrics.
-
-%\end{itemize}
 
 The pitcher slider allows users to determine the relative importance of ``stuff'', a colloquial term for pitch quality, versus release information. Stuff includes velocity, spin rate, and movement. Release includes release angles and release point. The batter slider allows users to determine the relative importance of launch conditions versus batted ball locations. Launch conditions includes exit velocity and launch angle. Location includes pull\%, middle\%, oppo\% (the percentage of batted balls place into the corresponding thirds of a baseball field). The default setting of the pitcher slider favors stuff over release information. The logic for this is quality of pitches being more representative of ability than release point. The default setting of the batter slider favors quality of contact over batted ball tendencies which appears to bias the synthetic batter's spray chart away from that of the batter under consideration. That being said, the batted ball tendencies are recorded as percentages of balls hit to six large grids on the baseball field, ignoring the quality, trajectory, and exact location of the batted ball. Thus, the quality of contact forms a more complete representation of a batter's skill than tendency.
 
@@ -652,7 +616,6 @@ $$
 $$
 %The above is not always less than 0 for all configurations. However, it will be less than 0 when $n$ is comparable to $n_{p,j'}$ and $n_{b,k'}$, a setting that we will guard against in our implementation by specifying a minimal sample size to enter into available player pool.
 Our choices of the elements of $\lambdabf$ will work well in the presence or absence of pitchers and batters that recover the traits of the players under study. Less is known about middle ground cases, especially when sample sizes are are small.
-
 
 \end{document}
 

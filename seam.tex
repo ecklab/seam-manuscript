@@ -13,6 +13,7 @@
 \usepackage{natbib}
 \usepackage{url}
 \usepackage{bm}
+\usepackage{setspace}
 
 \usepackage{geometry}
 \usepackage[usenames]{color}
@@ -69,11 +70,12 @@
 \allowdisplaybreaks
 
 \title{SEAM methodology for context-rich player matchup evaluations in baseball}
-\author{Julia Wapner\thanks{jwapner2@illinois.edu}, 
+\author{Julia Wapner$^1$\thanks{jwapner2@illinois.edu}, 
 %Charlie Young\thanks{cdy2@illinois.edu}, 
-David Dalpiaz\thanks{dalpiaz2@illinois.edu},
-and Daniel J. Eck\thanks{dje13@illinois.edu} \\[1em]
-Department of Statistics, University of Illinois Urbana-Champaign
+David Dalpiaz$^2$\thanks{dalpiaz2@illinois.edu},
+and Daniel J. Eck$^2$\thanks{dje13@illinois.edu} \\[1em]
+1. Baseball Analytics, Baltimore Orioles \\
+2. Department of Statistics, University of Illinois Urbana-Champaign
 }
 \date{}
 
@@ -92,7 +94,7 @@ The computational speed with which the method calculates the spray densities all
 
 \noindent\textbf{Keywords}: Nonparametric density estimation; Similarity scores; Model averaging; Reproducible research; Sabermetrics; Big data applications and visualization
 
-
+\doublespacing
 \section{Introduction}
 
 
@@ -241,7 +243,7 @@ where, for pitch type $t$, we let $n_{p,j,t}$ denote the matchup sample size of 
     \hat f_{\text{sb}, t}(\y|\x_{p,t}).
 \end{equation}
 
-The estimators \eqref{synth-est} are obviously biased estimators for $f$. However, they have the potential to reduce MSE. One obvious case is when, for all
+The estimators \eqref{synth-est} are biased estimators for $f$. However, they have the potential to reduce MSE. One obvious case is when, for all
 $t = 1,\ldots,n_{\text{type}}$, there exists weights
 $w_{p,j,t}, w_{b,k} \approx 1$ and
 $n_{p,j,t}, n_{b,k,t} > n$.
@@ -266,7 +268,7 @@ It is reasonable to assume that $n_{p,j,t} = O(n)$ and $n_{b,k,t} = O(n)$ for al
 
 \section{Validation}
 
-We evaluate the performance of our SEAM method through a validation approach in which we train the SEAM method on data through the 2020 season and then test the coverage of highest density regions with 2021 data. We define coverage as the proportion of batted balls that land in a location on the field that is within a level $\alpha$ highest density region. We consider both marginal and conditional coverage. Marginal coverage is assessed across all 2021 batted balls. Conditional coverage is assessed for 2021 batter-pitcher matchups that yielded 10 or more balls in play. We compute the proportion of individual batter-pitcher conditional coverages that at or above the nominal level, which we call conditional coverage success rate.
+We evaluate the performance of our SEAM method through a validation approach in which we train the SEAM method on data through the 2020 season and then test the coverage of highest density regions with 2021 data. We define coverage as the proportion of batted balls that land in a location on the field that is within a level $\alpha$ highest density region. We consider both marginal and conditional coverage. Marginal coverage is assessed across all 2021 batted balls. Conditional coverage is assessed for 2021 batter-pitcher matchups that yielded 10 or more balls in play. We compute the proportion of individual batter-pitcher conditional coverages that is at or above the nominal level, which we call conditional coverage success rate.
 
 \begin{table}
 \begin{center}
@@ -276,17 +278,18 @@ We evaluate the performance of our SEAM method through a validation approach in 
 batter & 0.547 & 0.793 & 0.938 & 0.513 (0.036) & 0.574 (0.035) & 0.662 (0.034) \\
 pitcher & 0.541 & 0.788 & 0.935 & 0.549 (0.036) & 0.595 (0.035) & 0.713 (0.032) \\\end{tabular}		
 \end{center}
-\caption{Marginal and conditional coverage properties for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution (standard errors in parentheses). The conditional coverage success rate is the proportion of individual batter-pitcher conditional coverages that at or above the nominal level. }
+\caption{Marginal and conditional coverage properties for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution (standard errors in parentheses). The conditional coverage success rate is the proportion of individual batter-pitcher conditional coverages that is at or above the nominal level. }
 \label{Tab:coverage}
 \end{table}
 
 
 We compare the coverage properties of our SEAM method to empirical batter spray charts and empirical pitcher spray charts which are estimated marginally across all pitchers and batters respectively using similar nonparametric estimation techniques. The results are included in Table~\ref{Tab:coverage}. We see that the highest density regions for each method achieve nominal marginal coverage. This is especially encouraging for SEAM since it is expected that the empirical batter and pitcher spray charts should obtain marginal coverage by their construction, provided that the players under study did not dramatically change in a material way. We also see that the conditional coverage of the SEAM method is noticeably and usefully higher than the other methods. 
 
-However, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the rectangle that contains the playing filed while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. 
+However, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the rectangle that contains the playing field while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. 
 
 We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n$ grids containing the highest probable batted ball locations as estimated by each method. Calculating average conditional coverages for fixed-size regions is an important consideration for fielding placement due to the physical constraint on how much of the baseball field defenders can reasonably cover. We considered [1500, 2500] as a range for the number of grids. This range corresponds to fixed-size regions that cover approximately [50\%,\;80\%] of fair territory of a baseball field that is 115,000 square feet. 
-We then assess the average conditional coverage of these fixed-size regions. What we find is that the SEAM fixed-size region has higher average conditional coverage than its competitors which ignore matchup considerations. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}, and Figure~\ref{Fig:fixed-size}. 
+
+We then assess the average conditional coverage of these fixed-size regions. What we find is that the SEAM fixed-size region has higher average conditional coverage than its competitors which ignore matchup considerations. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}, and Figure~\ref{Fig:fixed-size}. Note that were 129937 baseballs put into play in 2021. Thus, an increase in coverage by 1\% roughly corresponds to an increase of fielding 40 outs per team, and a difference of 40 outs corresponds to about one and half baseball games. It is reasonable to expect that any baseball team that implements our SEAM method could win an additional game over the course of the season. MLB organizations have repeatedly demonstrated a willingness to spend millions of dollars to obtain a comparable advantage via free agency \citep{clemens2021WAR}.
 
 %\begin{table}
 %\begin{tabular}{l|rr|rr|rr}%  & \multicolumn{2}{c|}{SEAM} & \multicolumn{2}{c|}{pitcher} & \multicolumn{2}{c}{batter}\\
@@ -432,7 +435,7 @@ Note that the same slider weights are applied to each pitch type so that $V_{p,t
 
 The primary contribution of this work is the development of SEAM methodology in which a synthetic spray chart density function $f_{\lambdabf}(\y)$ is estimated. In our presented context of batter-pitcher matchups, this estimated density function is a weighted average of $\hat f_\h(\y|\x)$, $\hat f_{\text{sp}}(\y)$, and $\hat f_{\text{sb}}(\y)$, where these weights are chosen to minimize MSE under an assumed smooth function space. The synthetic players are constructed to best mimic the players under study. It was demonstrated that our SEAM method provided more accurate predictions of future batted-ball locations than spray chart distributions computed from either the batter or pitcher in isolation. Our method of synthetic player construction is generalizable to other settings in baseball as well as other sports. We are not the first to incorporate additional players into an analysis via similarity scores with the understanding that doing so improves estimation performance. The PECOTA prediction methodology \citep{PECOTA} tries to forecast the ability of players using aggregate estimates obtained from other similar players. To the best of our knowledge, we are the first to base similarity scores exclusively on Statcast data which we believe provides a truer notion of talent similarity.
 
-We also developed an interactive web application which implements and provides visualizations of our SEAM methodology. This web application is fast, providing users with visual measures of batter-pitcher matchups nearly instantaneously. Our methodology displays a vast improvement upon empirical batter or pitcher spray charts which are computed marginally \citep{pettispray, marchi2019analyzing}. Additionally, matchup-specific spray charts are often not informative due to a lack of data. Our synthetic player construction alleviates this problem.
+We also developed an interactive web application which implements and provides visualizations of our SEAM methodology. This web application is fast, providing users with visual measures of batter-pitcher matchups nearly instantaneously. Our methodology displays an improvement upon empirical batter or pitcher spray charts which are computed marginally \citep{pettispray, marchi2019analyzing}. Additionally, matchup-specific spray charts are often not informative due to a lack of data. Our synthetic player construction alleviates this problem.
 
 As previously mentioned, the visualizations provided by our web application can help coaches position their fielders effectively. While a traditional spray chart may be useful in aggregate, building a custom spray chart to reflect a specific batter-pitcher matchup will yield more accurate results on a plate appearance by plate appearance level. This synthetically created spray chart will give the user an expected distribution of batted balls for the batter-pitcher matchup based on a combination of the distribution of similar batters against the pitcher, the distribution of similar pitchers against the batter, and the distribution of any observations of the pitcher vs batter since 2017. 
 
