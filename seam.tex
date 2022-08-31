@@ -287,44 +287,53 @@ We compare the coverage properties of our SEAM method to empirical batter spray 
 
 However, the highest density region for SEAM is slightly larger than its competitors. As an example, the level $\alpha = 0.10$ highest density region for SEAM includes 34\% of grids forming the rectangle that contains the playing field while similar highest density regions corresponding to the empirical batter and pitcher spray distributions include, respectively, 33.4\% and 33\% of such grids. 
 
-We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n$ grids containing the highest probable batted ball locations as estimated by each method. Calculating average conditional coverages for fixed-size regions is an important consideration for fielding placement due to the physical constraint on how much of the baseball field defenders can reasonably cover. We considered [1500, 2500] as a range for the number of grids. This range corresponds to fixed-size regions that cover approximately [50\%,\;80\%] of fair territory of a baseball field that is 115,000 square feet. 
+We will now consider a different type of confidence region which will balance these conflicting conclusions with size and coverage. This region is constructed using the $n_g$ grids containing the highest probable batted ball locations as estimated by each method. Calculating average conditional coverages for fixed-size regions is an important consideration for fielding placement due to the physical constraint on how much of the baseball field defenders can reasonably cover. We considered [1500, 2500] as a range for the number of grids. This range corresponds to fixed-size regions that cover approximately [50\%,\;80\%] of fair territory of a baseball field that is 115,000 square feet. 
 
-We then assess the average conditional coverage of these fixed-size regions. What we find is that the SEAM fixed-size region has higher average conditional coverage than its competitors which ignore matchup considerations. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in Table~\ref{Tab:fixed-size}, and Figure~\ref{Fig:fixed-size}. Note that were 129937 baseballs put into play in 2021. Thus, an increase in coverage by 1\% roughly corresponds to an increase of fielding 40 outs per team, and a difference of 40 outs corresponds to about one and half baseball games. It is reasonable to expect that any baseball team that implements our SEAM method could win an additional game over the course of the season. MLB organizations have repeatedly demonstrated a willingness to spend millions of dollars to obtain a comparable advantage via free agency \citep{clemens2021WAR}.
+We then assess the average conditional coverage of these fixed-size regions. What we find is that the SEAM fixed-size region has higher average conditional coverage than its competitors which ignore matchup considerations. This is despite the fact that the cumulative probability mass of the SEAM fixed-size region is lower than its competitors. The results are in %Table~\ref{Tab:fixed-size}, and 
+Figure~\ref{Fig:fixed-size}. Note that were 129937 baseballs put into play in 2021. Thus, an increase in coverage by 1\% roughly corresponds to an increase of fielding 40 outs per team, and a difference of 40 outs corresponds to about one and half baseball games. It is reasonable to expect that any baseball team that implements our SEAM method could win an additional game over the course of the season. MLB organizations have repeatedly demonstrated a willingness to spend millions of dollars to obtain a comparable advantage via free agency \citep{clemens2021WAR}. The importance of winning one additional game per season can not be overstated. Had the 2011 Atlanta Braves won one additional game, they would have forced a one-game tiebreaker between them and the St. Louis Cardinals. Instead, the Braves missed the playoffs altogether and the Cardinals won the World Series in historic fashion\footnote{\url{https://www.youtube.com/watch?v=46QITnnPINY&ab_channel=SecretBase}}.
+
+%The differences between the methods in Figure~\ref{Fig:fixed-size} are slight, but very important since a 1\% is potentially worth millions of dollars. 
+We now explore statistical significant differences between the methods depicted in Figure~\ref{Fig:fixed-size}. Individual coverages for particular matchups are quite variable. Therefore, point-wise differences between methods are not statistically significant. However, a linear regression model with coverage as the response, and method and the number of grids as predictors, reveals that the SEAM main effect is statistically significantly greater than those corresponding to competing methods. But classical tests of regression coefficients are dubious because diagnostic plots reveal modest violations of modeling assumptions. These violations of modeling assumptions was expected since the response variable lives in $[0,1]$. A nonparametric bootstrap of ordinary least squares (OLS) estimates was then performed with bootstrap sample size set at 10000. This analysis agreed with the original regression analysis, the proportion of bootstrap iterates for which the estimated coefficient corresponding to the SEAM method was exceeded by estimated coefficient corresponding to the empirical batter and empirical pitcher spray chart distributions was, respectively, 0 and 0.0147. More comprehensive results are depicted in Figure~\ref{Fig:boot}. This analysis suggests that the advantage offered by the SEAM method is indeed statistically significant. Note that a bootstrap analysis revealed that the regression model presented here was preferred over a larger model which included a separate slope coefficient for the empirical pitching method.
+
 
 %\begin{table}
-%\begin{tabular}{l|rr|rr|rr}%  & \multicolumn{2}{c|}{SEAM} & \multicolumn{2}{c|}{pitcher} & \multicolumn{2}{c}{batter}\\
-%  & coverage & prob. mass  & coverage & prob. mass  & coverage & prob. mass  \\%\hline%$n = 1000$ & 0.530 & 0.478 & 0.522 & 0.492 & 0.526 & 0.478 \\%\hline%$n = 2000$ & 0.758 & 0.709 & 0.741 & 0.721 & 0.750 & 0.710 \\%\hline%$n = 3000$ & 0.912 & 0.859 & 0.896 & 0.868 & 0.913 & 0.862\\%\hline%\end{tabular}
-%\caption{Conditional coverage and cumulative probability mass of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
+%\begin{center}
+%\begin{tabular}{c|ccc}%$n$ & SEAM & batter & pitcher\\
+%\hline%1500 & 0.652 & 0.643 & 0.642 \\
+%1600 & 0.674 & 0.664 & 0.668 \\
+%1700 & 0.700 & 0.684 & 0.691 \\
+%1800 & 0.718 & 0.702 & 0.710 \\
+%1900 & 0.739 & 0.721 & 0.732 \\
+%2000 & 0.758 & 0.741 & 0.750 \\
+%2100 & 0.782 & 0.760 & 0.772 \\
+%2200 & 0.799 & 0.779 & 0.792 \\
+%2300 & 0.816 & 0.798 & 0.810 \\
+%2400 & 0.832 & 0.815 & 0.828 \\
+%2500 & 0.846 & 0.837 & 0.844 %\end{tabular}
+%\end{center}
+%\caption{Average conditional coverages of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method.}
 %\label{Tab:fixed-size}
 %\end{table}
-
-\begin{table}
-\begin{center}
-\begin{tabular}{c|ccc}$n$ & SEAM & batter & pitcher\\
-\hline1500 & 0.652 & 0.643 & 0.642 \\
-1600 & 0.674 & 0.664 & 0.668 \\
-1700 & 0.700 & 0.684 & 0.691 \\
-1800 & 0.718 & 0.702 & 0.710 \\
-1900 & 0.739 & 0.721 & 0.732 \\
-2000 & 0.758 & 0.741 & 0.750 \\
-2100 & 0.782 & 0.760 & 0.772 \\
-2200 & 0.799 & 0.779 & 0.792 \\
-2300 & 0.816 & 0.798 & 0.810 \\
-2400 & 0.832 & 0.815 & 0.828 \\
-2500 & 0.846 & 0.837 & 0.844 \end{tabular}
-\end{center}
-\caption{Average conditional coverages of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method.}
-\label{Tab:fixed-size}
-\end{table}
-
 
 \begin{figure}[t!]
 \begin{center}
 \includegraphics[width=0.80\textwidth]{coverage_size.pdf}	
 \end{center}	
-\caption{Average conditional coverage of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n$ most probable grids according to each method. }
+\caption{Average conditional coverage of fixed-size confidence regions for SEAM, the empirical batter spray distribution, and the empirical pitcher spray distribution. The fixed-size regions are constructed from the $n_g$ most probable grids according to each method. The proportion of iterates that are less than 0 is 0 (left panel) and 0.0147 (right panel).}
 \label{Fig:fixed-size}
 \end{figure}
+
+
+\begin{figure}[t!]
+\begin{center}
+\includegraphics[width=0.90\textwidth]{bootstrap_density.pdf}	
+\end{center}	
+\caption{Nonparametric bootstrap investigation of the statistical significance of the increased coverage offered by our SEAM method. The distributions depicted are differences between OLS estimated coefficients between the empirical batter (left panel) and pitcher (right panel) spray chart distributions and the SEAM method. Negative values indicate preference for the SEAM method.}
+\label{Fig:boot}
+\end{figure}
+
+
+
 
 \section{Data considerations}
 
