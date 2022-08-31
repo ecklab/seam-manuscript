@@ -102,7 +102,7 @@ Baseball has a rich statistical history dating back to the first box score creat
 
 The basic box score statistics which serve as the foundation for most baseball statistics do not represent the fundamental unit for which outcomes are realized. Baseball is a game with a pitcher on the mound (and a defense behind him) who first throws a ball to a batter. From here the ball is put into play or it is not, and at this moment box score statistics are tabulated. When we look closer at this chain of events we see that the pitcher who throws the ball possesses an arsenal of pitches whose movement, velocity, and release point are unique to that pitcher. The batter also has a unique set of traits including how hard they hit the ball (often referred to as exit velocity), and the horizontal and vertical angles in which they hit the ball (often referred to as spray and launch angles respectively). When a ball is put into play it has a final location that is relevant to, but not included in, the box score. As recently as 2015, this type of high-resolution data has been collected and made publicly available \citep{statcast}. Proprietary sources maintain similar high-resolution data dating back several years prior to 2015 \citep{BIS}.
 
-This high resolution data has ushered in a new sophisticated class of techniques for finding and exploiting players' strengths and weaknesses. Use of these techniques have affected player performance and outcomes, which is reflected but noted in the boxscore. As an example, \cite{jensen2009bayesball} showed how this data could be used to better quantify defensive ability using Baseball Information Solutions data through 2007. One of the most prominent examples of the success of this high-resolution data has been the implementation of defensive shifting based on the spray chart \citep{pettispray, marchi2019analyzing}, a plot of locations a batter has hit the ball in the past. Through the early part of the 2022 MLB season, MLB had seen infield shifts on 37\% of pitches \citep{baccellieri2022infield}. This rate of deployment demonstrates the effectiveness of the strategy.
+This high resolution data has ushered in a new sophisticated class of techniques for finding and exploiting players' strengths and weaknesses. Use of these techniques have affected player performance and outcomes, which is reflected but noted in the boxscore. As an example, \cite{jensen2009bayesball} showed how this data could be used to better quantify defensive ability using Baseball Information Solutions data through 2007. One of the most prominent examples of the success of this high-resolution data has been the implementation of defensive shifting based on the spray chart \citep{pettispray, marchi2019analyzing}, a plot of locations a batter has hit the ball in the past. Spray charts are used extensively by MLB organizations for fielder positioning \citep[page 271]{marchi2019analyzing}. Through the early part of the 2022 MLB season, MLB had seen infield shifts on 37\% of pitches \citep{baccellieri2022infield}. This rate of deployment demonstrates the effectiveness of the strategy.
 
 Even though the shift has a demonstrated record of success, the strategy of the shift can be justified by batters' empirical spray chart or pitchers' empirical spray chart allowed. These charts are compiled marginally across all matchups and they therefore do not account for the interaction effect when a particular batter faces a particular pitcher. However, spray charts for specific batter-pitcher matchups are not often able to be reliably constructed due to sparse or non-existent matchup data. 
 
@@ -115,6 +115,19 @@ We argue that the advantage that SEAM offers translates to an additional win ove
 
 
 \section{Setting}
+
+Suppose that left-handed batter Joey Votto is about to face right-handed pitcher Justin Verlander, and further suppose that the fielding team desires to employ a Votto-specific shift. Both players are unique talents and they seldom face each other, this matchup has only produced two balls in play. Therefore, past matchup data is too sparse to be of much use. The fielding team could instead select fielder locations based on an estimated density constructed from Votto's spray chart or Verlander's spray chart allowed. These approaches suggest different fielder positioning schemes, see Figure~\ref{Fig:VerlanderVotto}. In this article, we propose the SEAM (synthetic estimated average matchup) method as a solution to these problems. The SEAM method provides a batter-pitcher specific spray chart density that can be used for more reliable fielder positioning. We will demonstrate that SEAM is superior to positioning strategies that are formed from exclusive use of either the batter or pitcher data. See Figure~\ref{Fig:VerlanderVotto} for the estimated SEAM spray chart density corresponding to the Joey Votto vs. Justin Verlander matchup.
+
+\begin{figure}[t!]
+\begin{center}
+	\includegraphics[width = 2.5in, height = 2.5in]{VerlanderVotto1.png} 
+	\includegraphics[width = 2.5in, height = 2.5in]{VerlanderVottoSEAM.png}\\
+	\includegraphics[width = 2.5in, height = 2.5in]{VerlanderVotto2.png}
+	\includegraphics[width = 2.5in, height = 2.5in]{VerlanderVotto3.png}	
+\end{center}
+\caption{Visualization of potential batted-ball locations corresponding to the Joey Votto vs. Justin Verlander matchup according to past data (top-left), our SEAM method (top-right), Joey Votto's estimated spray chart density against all right-handed pitchers (bottom-left), and Justin Verlander's estimated spray chart allowed density against left-handed batters (bottom-right). }
+\label{Fig:VerlanderVotto}
+\end{figure} 
 
 
 
